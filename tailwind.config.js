@@ -10,11 +10,12 @@ module.exports = withMT({
   theme: {
     extend: {
       colors: {
-        primary: "#1A1A1A",
+        primary: "#fba125",
+        secondary: "#ffb454",
+        dark: "#2e2e2e",
       },
       fontFamily: {
         nunito: ["Nunito Sans", "sans-serif"],
-        germania: ["Germania One", "sans-serif"],
       },
       fontSize: {
         xm: "12px",

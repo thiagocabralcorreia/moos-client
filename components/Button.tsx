@@ -16,7 +16,12 @@ const Button = ({ children, onClick }: ButtonProps) => {
       bg-primary hover:bg-secondary text-dark"
       onClick={onClick}
     >
-      <div className="flex justify-center items-center m-auto">{children}</div>
+      <div
+        className="flex justify-center items-center font-bold m-auto
+        text-dark"
+      >
+        {children}
+      </div>
     </motion.button>
   );
 };

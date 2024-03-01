@@ -46,7 +46,7 @@ export default function Login() {
         <div className="hidden w-full h-full lg:w-1/2 lg:flex items-center justify-center bg-primary">
           <img
             className="h-[250px] w-[250px]"
-            src="images/mooz-gray.png"
+            src="images/mooz-white.png"
             alt="Mooz Logo"
           />
         </div>

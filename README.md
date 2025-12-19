@@ -1,34 +1,138 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# React Forms Lab 🚀
 
-## Getting Started
+Um laboratório para estudar diferentes abordagens de formulários em React, começando com estado e validação manual, evoluindo para bibliotecas especializadas.
 
-First, run the development server:
+## 📌 Fase Atual: Fase 1 - Base (Manual)
 
-```bash
-npm run dev
-# or
-yarn dev
+**Stack atual:**
+
+- ⚛️ React + Vite
+- 📘 TypeScript
+- 🎨 Reablocks (componentes UI)
+- 🔧 Estado e validação **manual** (`useState`, `onChange`, `onSubmit`)
+- ❌ Sem React Hook Form
+- ❌ Sem Zod
+- ❌ Sem Jotai
+
+## 🎯 Objetivo
+
+Este projeto foi criado de forma **intencionalmente repetitiva e verbosa** para demonstrar os problemas que surgem ao gerenciar formulários manualmente:
+
+- ✋ Código duplicado
+- 📝 Validação espalhada
+- 🔄 Estado repetitivo
+- 🐛 Feedback de erro manual
+
+Isso prepara o terreno para entender **por que** bibliotecas como React Hook Form e Zod existem.
+
+## 📁 Estrutura do Projeto
+
+```
+react-forms-lab/
+├─ src/
+│  ├─ components/
+│  │  └─ forms/
+│  │     ├─ LoginForm.tsx      # Formulário de login
+│  │     ├─ RegisterForm.tsx   # Formulário de cadastro
+│  │     └─ ContactForm.tsx    # Formulário de contato
+│  ├─ App.tsx                  # Componente principal
+│  └─ main.tsx
+├─ index.html
+├─ package.json
+├─ vite.config.ts
+└─ README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Como executar
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+> ⚠️ **Requisito:** Node.js 20.19+ ou 22.12+
+>
+> Se você usa `nvm`, execute: `nvm use` (o projeto já tem um arquivo `.nvmrc`)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+# Instalar dependências
+npm install
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+# Rodar em modo de desenvolvimento
+npm run dev
 
-## Learn More
+# Build para produção
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📋 Formulários Implementados
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🔐 Login Form
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Campos: Email, Senha
+- Validações:
+  - Email deve conter "@"
+  - Senha deve ter no mínimo 6 caracteres
+- Feedback: Mensagem de erro única
 
-## Deploy on Vercel
+### 📝 Register Form
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Campos: Nome, Email
+- Validações:
+  - Nome deve ter no mínimo 3 caracteres
+  - Email deve conter "@"
+- Feedback: Lista de erros múltiplos
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 📬 Contact Form
+
+- Campos: Mensagem (textarea)
+- Validações:
+  - Mensagem deve ter no mínimo 10 caracteres
+- Feedback: Mensagem de erro única
+
+## 🔄 Evolução Planejada
+
+Este projeto seguirá uma evolução incremental:
+
+### ✅ Fase 1 - Base (Atual)
+
+Estado e validação manual
+
+### 🔜 Fase 2 - React Hook Form
+
+Refatoração usando React Hook Form para gerenciar estado e validação
+
+### 🔜 Fase 3 - Zod
+
+Adição de schemas de validação tipados com Zod
+
+### 🔜 Fase 4 - Jotai
+
+Gerenciamento de estado compartilhado entre formulários
+
+### 🔜 Fase 5 - Arquitetura Escalável
+
+Organização em camadas, separação de responsabilidades
+
+## 🎓 Aprendizados
+
+### Problemas da abordagem manual:
+
+- ❌ Muito código boilerplate
+- ❌ Difícil manter consistência
+- ❌ Validação duplicada
+- ❌ Estado espalhado por múltiplos `useState`
+- ❌ Sem tipagem forte nas validações
+
+### Próximos passos resolverão:
+
+- ✅ Centralização de estado com React Hook Form
+- ✅ Validação tipada com Zod
+- ✅ Estado compartilhado com Jotai
+- ✅ Código mais limpo e manutenível
+
+## 📚 Referências
+
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Reablocks](https://github.com/reaviz/reablocks)
+
+---
+
+**Próximo passo:** "Agora refatore os formulários usando **React Hook Form**"

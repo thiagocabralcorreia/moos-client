@@ -1,56 +1,49 @@
 // src/components/forms/LoginForm.tsx
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Stack, Input, Button, Text } from "reablocks";
+import { loginSchema, type LoginFormData } from "../../schemas/auth.schema";
 
 export function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  });
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
-    if (!email.includes("@")) {
-      setError("Email inválido");
-      return;
-    }
-
-    if (password.length < 6) {
-      setError("Senha deve ter no mínimo 6 caracteres");
-      return;
-    }
-
-    setError("");
+  async function onSubmit(data: LoginFormData) {
+    console.log("Dados validados:", data);
     alert("Login realizado com sucesso");
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Stack>
         <div style={{ marginBottom: "16px" }}>
           <Text style={{ display: "block", marginBottom: "8px" }}>Email</Text>
-          <Input
-            fullWidth
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <Input fullWidth {...register("email")} />
+          {errors.email && (
+            <Text style={{ color: "red", fontSize: "14px", marginTop: "4px" }}>
+              {errors.email.message}
+            </Text>
+          )}
         </div>
 
         <div style={{ marginBottom: "16px" }}>
           <Text style={{ display: "block", marginBottom: "8px" }}>Senha</Text>
-          <Input
-            fullWidth
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <Input fullWidth type="password" {...register("password")} />
+          {errors.password && (
+            <Text style={{ color: "red", fontSize: "14px", marginTop: "4px" }}>
+              {errors.password.message}
+            </Text>
+          )}
         </div>
 
-        {error && (
-          <Text style={{ color: "red", marginBottom: "16px" }}>{error}</Text>
-        )}
-
-        <Button type="submit">Entrar</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Entrando..." : "Entrar"}
+        </Button>
       </Stack>
     </form>
   );

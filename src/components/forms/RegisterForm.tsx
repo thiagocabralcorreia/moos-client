@@ -1,64 +1,52 @@
 // src/components/forms/RegisterForm.tsx
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Stack, Input, Button, Text } from "reablocks";
+import {
+  registerSchema,
+  type RegisterFormData,
+} from "../../schemas/auth.schema";
 
 export function RegisterForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState<string[]>([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+  });
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
-    const validationErrors: string[] = [];
-
-    if (name.trim().length < 3) {
-      validationErrors.push("Nome muito curto");
-    }
-
-    if (!email.includes("@")) {
-      validationErrors.push("Email inválido");
-    }
-
-    setErrors(validationErrors);
-
-    if (validationErrors.length === 0) {
-      alert("Cadastro realizado");
-    }
+  async function onSubmit(data: RegisterFormData) {
+    console.log("Dados validados:", data);
+    alert("Cadastro realizado com sucesso");
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Stack>
         <div style={{ marginBottom: "16px" }}>
           <Text style={{ display: "block", marginBottom: "8px" }}>Nome</Text>
-          <Input
-            fullWidth
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <Input fullWidth {...register("name")} />
+          {errors.name && (
+            <Text style={{ color: "red", fontSize: "14px", marginTop: "4px" }}>
+              {errors.name.message}
+            </Text>
+          )}
         </div>
 
         <div style={{ marginBottom: "16px" }}>
           <Text style={{ display: "block", marginBottom: "8px" }}>Email</Text>
-          <Input
-            fullWidth
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <Input fullWidth {...register("email")} />
+          {errors.email && (
+            <Text style={{ color: "red", fontSize: "14px", marginTop: "4px" }}>
+              {errors.email.message}
+            </Text>
+          )}
         </div>
 
-        {errors.length > 0 && (
-          <div style={{ marginBottom: "16px" }}>
-            {errors.map((err) => (
-              <Text key={err} style={{ color: "red", display: "block" }}>
-                {err}
-              </Text>
-            ))}
-          </div>
-        )}
-
-        <Button type="submit">Cadastrar</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Cadastrando..." : "Cadastrar"}
+        </Button>
       </Stack>
     </form>
   );

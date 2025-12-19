@@ -1,42 +1,44 @@
 // src/components/forms/ContactForm.tsx
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Stack, Button, Text, Textarea } from "reablocks";
+import {
+  contactSchema,
+  type ContactFormData,
+} from "../../schemas/contact.schema";
 
 export function ContactForm() {
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+  });
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
-    if (message.trim().length < 10) {
-      setError("Mensagem muito curta");
-      return;
-    }
-
-    setError("");
-    alert("Mensagem enviada");
+  async function onSubmit(data: ContactFormData) {
+    console.log("Dados validados:", data);
+    alert("Mensagem enviada com sucesso");
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Stack>
         <div style={{ marginBottom: "16px" }}>
           <Text style={{ display: "block", marginBottom: "8px" }}>
             Mensagem
           </Text>
-          <Textarea
-            fullWidth
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
+          <Textarea fullWidth {...register("message")} />
+          {errors.message && (
+            <Text style={{ color: "red", fontSize: "14px", marginTop: "4px" }}>
+              {errors.message.message}
+            </Text>
+          )}
         </div>
 
-        {error && (
-          <Text style={{ color: "red", marginBottom: "16px" }}>{error}</Text>
-        )}
-
-        <Button type="submit">Enviar</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Enviando..." : "Enviar"}
+        </Button>
       </Stack>
     </form>
   );

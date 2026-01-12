@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "jotai": "^2.16.0",
     "reablocks": "^9.2.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

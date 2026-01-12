@@ -2,6 +2,7 @@ import { Stack, Card, Text } from "reablocks";
 import { LoginForm } from "./components/forms/LoginForm";
 import { RegisterForm } from "./components/forms/RegisterForm";
 import { ContactForm } from "./components/forms/ContactForm";
+import { JotaiPanel } from "./components/JotaiPanel";
 
 export function App() {
   return (
@@ -12,6 +13,10 @@ export function App() {
         >
           React Forms Lab
         </Text>
+
+        <Card style={{ marginBottom: "24px", padding: "24px" }}>
+          <JotaiPanel />
+        </Card>
 
         <Card style={{ marginBottom: "24px", padding: "24px" }}>
           <Text

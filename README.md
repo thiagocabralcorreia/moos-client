@@ -2,17 +2,15 @@
 
 Um laboratório para estudar diferentes abordagens de formulários em React, começando com estado e validação manual, evoluindo para bibliotecas especializadas.
 
-## 📌 Fase Atual: Fase 1 - Base (Manual)
+## 📌 Fase Atual
 
 **Stack atual:**
 
 - ⚛️ React + Vite
 - 📘 TypeScript
 - 🎨 Reablocks (componentes UI)
-- 🔧 Estado e validação **manual** (`useState`, `onChange`, `onSubmit`)
-- ❌ Sem React Hook Form
-- ❌ Sem Zod
-- ❌ Sem Jotai
+- 🧭 React Hook Form + Zod (validação tipada)
+- 🌐 Jotai (estado global leve)
 
 ## 🎯 Objetivo
 
@@ -31,12 +29,16 @@ Isso prepara o terreno para entender **por que** bibliotecas como React Hook For
 react-forms-lab/
 ├─ src/
 │  ├─ components/
+│  │  ├─ JotaiPanel.tsx        # Demonstração de estado global (Jotai)
 │  │  └─ forms/
-│  │     ├─ LoginForm.tsx      # Formulário de login
-│  │     ├─ RegisterForm.tsx   # Formulário de cadastro
-│  │     └─ ContactForm.tsx    # Formulário de contato
+│  │     ├─ LoginForm.tsx      # Formulário de login (RHF + Zod)
+│  │     ├─ RegisterForm.tsx   # Formulário de cadastro (RHF + Zod)
+│  │     └─ ContactForm.tsx    # Formulário de contato (RHF + Zod)
+│  ├─ state/atoms.ts           # Átomos globais Jotai
 │  ├─ App.tsx                  # Componente principal
-│  └─ main.tsx
+│  └─ main.tsx                 # Providers (Theme + Jotai)
+├─ JOTAI_GUIDE.md              # Guia prático de Jotai
+├─ ZOD_GUIDE.md                # Guia prático de Zod
 ├─ index.html
 ├─ package.json
 ├─ vite.config.ts
@@ -64,67 +66,52 @@ npm run build
 
 ### 🔐 Login Form
 
+- React Hook Form + Zod (`loginSchema`)
 - Campos: Email, Senha
-- Validações:
-  - Email deve conter "@"
-  - Senha deve ter no mínimo 6 caracteres
-- Feedback: Mensagem de erro única
+- Validações: email válido, senha min 6 chars
 
 ### 📝 Register Form
 
+- React Hook Form + Zod (`registerSchema`)
 - Campos: Nome, Email
-- Validações:
-  - Nome deve ter no mínimo 3 caracteres
-  - Email deve conter "@"
-- Feedback: Lista de erros múltiplos
+- Validações: nome min 3 chars, email válido
 
 ### 📬 Contact Form
 
+- React Hook Form + Zod (`contactSchema`)
 - Campos: Mensagem (textarea)
-- Validações:
-  - Mensagem deve ter no mínimo 10 caracteres
-- Feedback: Mensagem de erro única
+- Validações: mensagem min 10 chars
+
+### 🌐 Jotai Panel
+
+- Toggle de tema (`themeAtom`)
+- Contador global + derivado (`counterAtom`, `counterLabelAtom`)
+- Login mock global (`loginAtom` → `userAtom`)
 
 ## 🔄 Evolução Planejada
 
 Este projeto seguirá uma evolução incremental:
 
-### ✅ Fase 1 - Base (Atual)
+### ✅ Fase 2 - React Hook Form + Zod (Atual)
 
-Estado e validação manual
+Validação tipada e gerenciamento de formulário centralizado.
 
-### 🔜 Fase 2 - React Hook Form
+### ✅ Fase 4 - Jotai (Demonstração básica)
 
-Refatoração usando React Hook Form para gerenciar estado e validação
+Estado global leve com atoms e ações assíncronas.
 
-### 🔜 Fase 3 - Zod
+### 🔜 Próximos
 
-Adição de schemas de validação tipados com Zod
-
-### 🔜 Fase 4 - Jotai
-
-Gerenciamento de estado compartilhado entre formulários
-
-### 🔜 Fase 5 - Arquitetura Escalável
-
-Organização em camadas, separação de responsabilidades
+- Integrar `LoginForm` para popular `userAtom` após sucesso.
+- Usar `themeAtom` para alternar tema do Reablocks dinamicamente.
+- Adicionar toasts globais com atom dedicado.
 
 ## 🎓 Aprendizados
 
-### Problemas da abordagem manual:
-
-- ❌ Muito código boilerplate
-- ❌ Difícil manter consistência
-- ❌ Validação duplicada
-- ❌ Estado espalhado por múltiplos `useState`
-- ❌ Sem tipagem forte nas validações
-
-### Próximos passos resolverão:
-
-- ✅ Centralização de estado com React Hook Form
-- ✅ Validação tipada com Zod
-- ✅ Estado compartilhado com Jotai
-- ✅ Código mais limpo e manutenível
+- ✅ Formulários tipados com Zod + React Hook Form
+- ✅ Estado global simples e derivado com Jotai
+- ✅ Padrões de atoms graváveis, derivados e ações async
+- ⚙️ Próximo: integrar átomos aos formulários reais e temas
 
 ## 📚 Referências
 

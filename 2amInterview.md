@@ -30,6 +30,8 @@ It helps improve performance by avoiding unnecessary re-renders and reducing cod
 
 I don’t need to use useEffect to fetch data anymore, and the code is cleaner.
 
+React Query avoids unnecessary requests and keeps data consistent across components, so we don’t re-fetch the same data multiple times
+
 🔹 React Hook Form + Zod
 
 I work with React Hook Form because it helps me manage form state and avoid unnecessary re-renders of inputs, which improves performance.
@@ -155,3 +157,30 @@ I haven’t used Reablocks yet, but I’ve worked with other UI libraries.
 I’m comfortable learning component-based design systems.
 
 ---
+
+Server state I usually manage with React Query.
+Global client state with something like Jotai when needed.
+And local state stays inside components.
+
+---
+
+What’s the difference between server state and client state?
+
+Server state is data that comes from the backend and can change outside the app.
+Client state is data that lives only inside the frontend, like UI state or form state.
+
+---
+
+I have a background in advertising and graphic design.
+
+I worked in an agency, and I started doing small HTML and CSS tasks.
+
+I really enjoyed building things and understanding how the web works,
+so I decided to move fully into programming.
+
+Today, this background helps me think not only as a developer,
+but also about UX, users and product.
+
+---
+
+From what I’ve seen, Dropzone AI builds AI-driven tools for cybersecurity teams to automate investigation of alerts, reducing manual workload and improving response speed.

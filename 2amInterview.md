@@ -76,3 +76,82 @@ It helps keep a clean component hierarchy and consistent UI, which makes the cod
 “The resolver acts as a bridge between both, so the form only submits when the data matches the schema.”
 
 “This gives me strong guarantees about data correctness and keeps business rules out of the UI layer.”
+
+---
+
+When do you prefer rebase over merge?
+Any risks with rebase?
+Do you use rebase on shared branches?
+
+I usually use rebase on my local feature branches to keep a clean history.
+I avoid rebasing shared branches because it rewrites commit history and can cause conflicts for the team.
+
+Why do some teams forbid rebase on main?
+
+Because rebase rewrites history. On shared branches, this can break other developers’ work.
+
+---
+
+useQuery is used to fetch and cache server data.
+It automatically handles loading, error, and success states, and keeps data in sync with the server.
+
+It also avoids refetching data unnecessarily by using caching and background refetch.
+
+useMutation is used for create, update, or delete operations.
+After a successful mutation, I usually invalidate or update related queries to keep the data consistent.
+
+I usually call queryClient.invalidateQueries after the mutation succeeds.
+
+---
+
+Why is React Query performant?
+
+Because it avoids unnecessary network requests and re-renders.
+It caches server data, shares it across components, and updates only when the data really changes.
+
+React Query is focused on server state.
+It doesn’t control inputs directly, so it doesn’t cause input re-renders like local state might.
+
+Is React Query a replacement for Redux?
+
+No. React Query is for server state.
+Redux or other state managers are usually for client or global UI state.
+
+---
+
+Why React Hook Form instead of controlled inputs?
+How does it improve performance?
+Why combine it with Zod?
+
+React Hook Form reduces re-renders because inputs are mostly uncontrolled.
+That makes forms more performant, especially large ones.
+
+Zod allows me to define a schema for validation and typing.
+Using a resolver, I can validate and type the form data automatically on submit.
+
+Can you use React Hook Form without Zod?
+
+Yes. Zod is optional.
+It’s useful when we want schema-based validation and strong typing.
+
+---
+
+Why Jotai instead of Context?
+When would Context be enough?
+
+Context works well for simple global state.
+But it can cause unnecessary re-renders.
+With Jotai, I can split state into atoms and update only what is needed.
+
+“Is Jotai better than Redux?”
+
+It depends on the project.
+Jotai is great for simple and medium global state.
+Redux is better when we need strict structure or complex workflows.
+
+---
+
+I haven’t used Reablocks yet, but I’ve worked with other UI libraries.
+I’m comfortable learning component-based design systems.
+
+---
